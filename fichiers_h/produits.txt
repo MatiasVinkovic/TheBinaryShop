@@ -1,0 +1,5 @@
+txt 0 txt 0.0 0 -3
+souris 101 Gpro 80.0 1 24
+casque 102 hyperXcloudII 80.0 2 80
+PC 103 pc_gaming 800.0 4 0
+PC 104 pc_gaming 800.0 4 45
