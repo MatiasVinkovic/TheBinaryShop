@@ -1,5 +1,0 @@
-categorie 0 name 0.0 0 0
-souris 102 Gpro 80.0 1 30
-casque 103 hyperXcloudII 80.0 2 1
-PC 104 pc_gaming 800.0 4 4
-PC 104 pc_gaming 800.0 4 4
