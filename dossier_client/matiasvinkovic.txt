@@ -45,3 +45,5 @@ hyperXcloudII
 Gpro
 Gpro
 Gpro
+souris_corsair
+hyperXcloudII
