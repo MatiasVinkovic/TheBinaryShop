@@ -1,5 +1,7 @@
-txt 0 txt 0.0 0 -3
-souris 101 Gpro 80.0 1 24
-casque 102 hyperXcloudII 80.0 2 80
-PC 103 pc_gaming 800.0 4 0
-PC 104 pc_gaming 800.0 4 45
+101 Gpro 80.00 1 3
+102 hyperXcloudII 80.00 2 3
+103 pc_gaming 800.00 4 8
+104 pc_razer 800.00 4 2
+105 souris_corsair 70.00 2 2
+106 tapis_souris 70.00 2 2
+107 tapis_souris 70.00 2 2

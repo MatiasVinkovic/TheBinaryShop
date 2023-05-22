@@ -17,7 +17,6 @@
 //structure du produit
 typedef struct Article{
     //structure complete d'un produit
-    char categorie[32];
     int ref_number;
     char name[32];
     float price;
@@ -67,7 +66,7 @@ void decrementArticleQuantity(int target_line, int decrement){
     //on a maintenant recuperer tout dans le tableau      
             //car premiere ligne ne compte pas
     for(int i = 0; i<NBR_ARTICLE;i++){
-        fscanf(product_file, "%s %d %s %f %d %d", tab[i].categorie, &tab[i].ref_number, tab[i].name, &tab[i].price,&tab[i].size, &tab[i].qte);
+        fscanf(product_file, "%d %s %f %d %d", &tab[i].ref_number, tab[i].name, &tab[i].price,&tab[i].size, &tab[i].qte);
     }
 
     //on ferme et on réouvre le fichier produit
@@ -81,10 +80,10 @@ void decrementArticleQuantity(int target_line, int decrement){
     //on parcourt le fichier ligne par ligne
     while(fgets(ligne_courante, sizeof(ligne_courante),product_file) != NULL){
         if(acc == target_line){
-            fprintf(fichier_tmp, "%s %d %s %.1f %d %d\n",tab[acc].categorie, tab[acc].ref_number, tab[acc].name, tab[acc].price,tab[acc].size,(tab[acc].qte-decrement));
+            fprintf(fichier_tmp, "%d %s %.1f %d %d\n",tab[acc].ref_number, tab[acc].name, tab[acc].price,tab[acc].size,(tab[acc].qte-decrement));
         }
         else{
-            fprintf(fichier_tmp, "%s %d %s %.1f %d %d\n",tab[acc].categorie, tab[acc].ref_number, tab[acc].name, tab[acc].price, tab[acc].size,tab[acc].qte);
+            fprintf(fichier_tmp, "%d %s %.1f %d %d\n",tab[acc].ref_number, tab[acc].name, tab[acc].price, tab[acc].size,tab[acc].qte);
         }
         acc++;
     }   
@@ -136,7 +135,7 @@ void buyArticle(char nom[],char prenom[], int ref_number, int target_line, char 
     //on a maintenant recuperer tout dans leref_number, isIn+1 tableau      
             //car premiere ligne ne compte pas
     for(int i = 0; i<NBR_ARTICLE;i++){
-        fscanf(product_file, "%s %d %s %f %d %d", tab[i].categorie, &tab[i].ref_number, tab[i].name, &tab[i].price,&tab[i].size, &tab[i].qte);
+        fscanf(product_file, "%d %s %f %d %d", &tab[i].ref_number, tab[i].name, &tab[i].price,&tab[i].size, &tab[i].qte);
     }//on a bien recuperer les produits (deja testé)
     fclose(product_file);
 
@@ -190,7 +189,7 @@ void searchArticle(char name[], char first_name[],int n){ //n le nombre d'articl
     //on a maintenant recuperer tout dans le tableau      
             //car premiere ligne ne compte pas
     for(int i = 0; i<n;i++){
-        fscanf(product_file, "%s %d %s %f %d %d", tab[i].categorie, &tab[i].ref_number, tab[i].name, &tab[i].price,&tab[i].size, &tab[i].qte);
+        fscanf(product_file, "%d %s %f %d %d", &tab[i].ref_number, tab[i].name, &tab[i].price,&tab[i].size, &tab[i].qte);
     }
     //printf("\nle prix du premier produit est <%f>",tab[1].price);
     //printf("\ntous les numeros de reference : ");
