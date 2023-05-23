@@ -11,6 +11,7 @@
 int questions(){
 
 char answer1[32];
+  //on recommence tant qu'un des deux n'a pas été choisi
   do{
   printf("Que souhaitez-vous faire ? Entrer 'Rechercher' pour rechercher un article ou sur 'Sortir' pour sortir du mode gestion\n");
   int check=scanf("%s", answer1);
@@ -34,6 +35,7 @@ else{return 1;}
 
 int question2(){
   char answer3[32];
+  // on recommence tant que la réponse n'est pas valide
   do{
     printf("Que voulez-vous faire maintenant ? Entrer 'Restockage' pour augmenter le stock de ce produit ou 'Sortir' pour quitter le mode gestion\n");
   scanf("%s",answer3);
@@ -52,6 +54,7 @@ int question2(){
 
 int numOrName(){
 char answer2[32];
+  // on demande tant que la réponse n'est pas l'une des deux attendues
   do{
   printf("Entrer 'Nom' pour rechercher l'article par son nom ou 'Numero' pour le rechercher par son numero de reference. 'Sortir' pour revenir en arriere \n ");
   scanf("%s",answer2);
@@ -61,15 +64,19 @@ char answer2[32];
   }
 
 }while(strcmp(answer2,"Nom")!=0 && strcmp(answer2,"Numero")!=0 && strcmp(answer2,"Sortir")!=0);
+  //retourne 1 si l'utilisateur a choisi d'effectuer une recherche par le nom
 if(strcmp(answer2,"Nom")==0){
   return 1;
 }
+  // retourne 2 si l'utilisateur a choisi le numéro de référence
 else if(strcmp(answer2,"Numero")==0){
   return 2;
 }
+  // retourne 0 si l'utilisateur a choisi de sortir du mode gestion 
 else if(strcmp(answer2,"Sortir")==0){
   return 0;
 }
+  // on quitte le programme si il y a un problème
 else{
   printf("Une erreur est survenue");
   exit(37);
