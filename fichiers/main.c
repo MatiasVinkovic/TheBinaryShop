@@ -16,6 +16,7 @@ int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO)
   FILE*Tmp=NULL;
   int A,f;
   if(tab==NULL || N<=0){
+    printf("Erreur avec le tableau\n");
     exit(35);
   }
 
@@ -30,22 +31,27 @@ int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO)
       exit(52);
     }
   }while(error_gestion == -1);
+  //On ouvre le nouveau fichier texte qui contiendra la quantité ajoutée
   Tmp=fopen("tmp.txt","w");
   if(Tmp==NULL){
-    printf("Erreur");
+    printf("Erreur d'ouverture\n");
     exit(38);
   }
+  //Si on a recherché l'article par le numéro de référence, donc pas par le nom
   if(strcmp(articlename,"")==0){
-
+// on ajoute l'espace occupé par la nouvelle quantité à l'espace initialement occupé. 
 SO+=tab[ref_numberofref-1].size*A;
+    //On retourne 0 si le nouvel espace occupé dépasse l'espace disponible dans le magasin
 if(SO>SHOP){
   fclose(Tmp);
   return 0;
 }
+    //sinon, on ajoute la quantité souhaitée à l'article souhaité
 else{
   tab[ref_numberofref-1].qte+=A;
 }
 }
+  //Même principe en effectuant une recherche par le nom
 else if(ref_numberofref==0){
 for( j=0;j<N;j++){
   if(strcmp(articlename,tab[j].name)==0){
@@ -61,6 +67,7 @@ else{
   tab[k].qte+=A;
 }
 }
+  //on affiche donc dans le fichier les données de chaque article y compris la nouvelle quantité de l'article en question
 for(i=0;i<N;i++){
   fprintf(Tmp,"%d %s %.2f %d %d\n", tab[i].ref_number, tab[i].name, tab[i].price,tab[i].size, tab[i].qte);
 }
@@ -82,16 +89,22 @@ Article* creationtableau(int N){
   FILE *products=NULL;
   products=fopen("produits.txt","r");
 if(products==NULL){
+  printf("Erreur d'ouverture\n");
   exit(2);
 }
+  // on déclare le tableau qui contiendra tous les articles
   Article* tab=NULL;
   if(N<=0){
+    printf("Erreur avec le nombre d'articles");
     exit(10);
   }
+  // on alloue l'espace nécéssaire au pointeur pour qu'il contienne tous les articles
   tab=malloc(N*(sizeof(Article)));
   if(tab==NULL){
+    printf("Erreur avec le tableau");
     exit(11);
   }
+  // on récupère les informations dans le fichier produit pour les attribuer à chaque article du tableau
   for( i=0;i<N;i++){
 fscanf(products,"%d %s %f %d %d", &tab[i].ref_number, tab[i].name, &tab[i].price,&tab[i].size, &tab[i].qte);
 
@@ -237,7 +250,7 @@ int main(){
 
         Article* tabarticles;
         int i,j,k,lowstock=5,count=0,occupiedplace=0,remainingplace=0;
-        int a,b,c,d,e;
+        int a,b,c/*,d,e*/;
         char searchname[32]="";
         int searchref_number=0;
         char try[10];
@@ -257,9 +270,9 @@ int main(){
           sleep(1);break;
       }
     }while(strcmp("pomme",try)!=0);
-
+// on remplit le tableau à l'aide de la fonction correspondante
     tabarticles = creationtableau(nbarticles);
-
+// on calcule l'espace occupé dans le magasin
     for(k=1;k<nbarticles;k++){
         occupiedplace+=(tabarticles[k].qte*tabarticles[k].size);
     }
@@ -283,12 +296,12 @@ int main(){
     a=questions();
     if(a==0){
     printf("Passez une bonne journée !");
-    exit(26);
+    exit(0);
     }
     else{
     b=numOrName();
 
-
+// on cherche par le nom de l'article
     if(b==1){
     do{
         error_gestion = 0;isIn = 0;
@@ -305,7 +318,8 @@ int main(){
             if(isIn !=-1){error_gestion=-1;}
 
         if(strcmp(searchname,"Sortir")==0){
-        exit(22);
+          printf("Passez une bonne journée");
+        exit(0);
         }
     }while(error_gestion==-1);
 
@@ -313,7 +327,7 @@ int main(){
     displaysearchedarticle(tabarticles,nbarticles,searchname,searchref_number);
     }
     }
-
+// on cherche par le numéro de référence
     else if(b==2){
     do{
             error_gestion = 0;
@@ -338,12 +352,12 @@ int main(){
         }
         else if(b==0){
         printf("\nPassez une bonne journee\n");
-        exit(25);
+        exit(0);
         }
         }
         if(question2()==0){
         printf("\nPassez une bonne journee !\n");
-        exit(51);
+        exit(0);
         }
         else{
         do{
@@ -354,7 +368,9 @@ int main(){
         }while(c!=1);
 
         }
+      // on libère l'espace alloué par la fonction malloc
         free(tabarticles);
+      // on supprime le premier fichier produits et on le remplace donc par le nouveau avec la nouvelle quantité si le restockage s'est bien passé
         remove("produits.txt");
         rename("tmp.txt", "produits.txt");
         temporalDimension(tabarticles, searchname, searchref_number);
