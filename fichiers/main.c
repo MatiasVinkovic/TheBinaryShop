@@ -28,7 +28,7 @@ int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO)
     if(A <= 0){error_gestion = -1;}
     if(A==99){
       printf("Passez une bonne journee !");
-      exit(52);
+      exit(0);
     }
   }while(error_gestion == -1);
   //On ouvre le nouveau fichier texte qui contiendra la quantité ajoutée
