@@ -7,7 +7,7 @@
 
 #include "prototype.h"
 
-
+// retourne 0 si l'utilisateur veut sortir du mode gestion et 1 s'il veut poursuivre sa recherche
 int questions(){
 
 char answer1[32];
