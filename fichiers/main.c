@@ -18,7 +18,7 @@ int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO)
   if(tab==NULL || N<=0){
     exit(35);
   }
-  
+
   do{
     error_gestion = 0;
     printf("De combien voulez-vous augmenter le stockage ? Entrer '99' pour sortir du programme\n");
@@ -36,7 +36,7 @@ int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO)
     exit(38);
   }
   if(strcmp(articlename,"")==0){
-  
+
 SO+=tab[ref_numberofref-1].size*A;
 if(SO>SHOP){
   fclose(Tmp);
@@ -107,19 +107,26 @@ fclose(products);
 int main(){
 
     //MENU DU DEBUT DE PROGRAMME
-    
+
     char nom[100];
     char prenom[100];
-    int boolHasAccount = 0;    //identifier si un compte en premier lieu 
+    int boolHasAccount = 0;    //identifier si un compte en premier lieu
     int secondBoolHasAccount = 0; // apres avoir creer ou non un compte
     int user_choice = 0;
     char tmp_name[100];
     int error_gestion =0;
+    int want_to_reboot = 0;
 
     //on met le panier de l'user d'avant à 0
     FILE* total_price = fopen("total_price.txt","w");if(total_price==NULL){exit(1);}
     fputs("0",total_price);fclose(total_price);
     int menu_user_choice = 0;//1 achat, 2 gestion
+
+    //gros do while pour revenir au menu principal à la fin du programme
+    do{
+
+
+
     couleur("36");
 
 
@@ -129,8 +136,8 @@ int main(){
                         printf("\n(_  _| (_) |_  _)  (___)  \\__ \\ ) _ (  )(_)(  )___/  ");
                         printf("\n  (_) \\___/  (_)          (___/(_) (_)(_____)(__)\n\n");couleur("0");
 
-    couleur("33");           
-    do{ 
+    couleur("33");
+    do{
         error_gestion = 0;
         printf("=========MENU==========");
         printf("\nBienvenue dans le magasin !");
@@ -138,7 +145,7 @@ int main(){
 
         printf("\n\n1) Mode achat ");
         printf("\n2) Mode gestion");
-        printf("\n3)je veux absoluement quitter ce magasin\n");
+        printf("\n3)je veux absoluement quitter ce magasin\n    ->");
         couleur("0");
         if(scanf("%d", &menu_user_choice) != 1){
             couleur("31");printf("\nInvalid input ->Please enter a correct number\n");couleur("0");
@@ -150,8 +157,8 @@ int main(){
             error_gestion = -1;
         }
     }while(error_gestion ==-1);
-    
-    
+
+
     if(menu_user_choice == 1){
         //MODE ACHAT
         do{
@@ -163,12 +170,12 @@ int main(){
                 scanf("%*c");
                 error_gestion = -1;}if(boolHasAccount != 1 && boolHasAccount!= 0){error_gestion = -1;}
         }while(error_gestion == -1);
-        
-        
+
+
         switch(boolHasAccount){
             case 1:
 
-                
+
                 //le client a un compte
                 printf("\nvotre nom : ");
                 scanf("%s", nom);
@@ -176,15 +183,15 @@ int main(){
                 printf("\nvotre prenom : ");
                 scanf("%s", prenom);
 
-                
-                
+
+
                 if(hasAccount(nom, prenom)){
-                    //le client a bel et bien un compte : 
+                    //le client a bel et bien un compte :
                     secondBoolHasAccount = 1;
                     break;
                 }
                 else{
-                    //si il dit qu'il a un compte alors que non : on lui en fait creer un 
+                    //si il dit qu'il a un compte alors que non : on lui en fait creer un
                     do{
                     error_gestion = 0;
                     printf("\nVoulez vous en créer un ? \n1) oui \n0) non j'en ai aucune envie, laissez moi partir d'ici !\n   -->");
@@ -195,7 +202,7 @@ int main(){
                         error_gestion = -1;
                         }if(user_choice!=1 && user_choice !=0){error_gestion = -1;}
                     }while(error_gestion == -1);
-                    
+
                     switch(user_choice){
                         case 1://veut creer un compte
                         //le client n'a pas de compte
@@ -227,28 +234,28 @@ int main(){
     }
     else if(menu_user_choice == 2){
         //mode gestion
-        
+
         Article* tabarticles;
         int i,j,k,lowstock=5,count=0,occupiedplace=0,remainingplace=0;
         int a,b,c,d,e;
         char searchname[32]="";
-        int searchref_number=0; 
+        int searchref_number=0;
         char try[10];
         int isIn = 0;
         int error_gestion = 0;
 
 
     do{
-    printf("Veuillez entrer le mot de passe \n");
-    scanf("%s",try);
-    if(strcmp("pomme", try)!=0){
-        couleur("31");printf("Acces refuse\n");couleur("0");
-        sleep(1);
-    }
-    else{
-        couleur("32");printf("Acces autorise\n");couleur("0");
-        sleep(1);break;
-    }
+      printf("Veuillez entrer le mot de passe \n");
+      scanf("%s",try);
+      if(strcmp("pomme", try)!=0){
+          couleur("31");printf("Acces refuse\n");couleur("0");
+          sleep(1);
+      }
+      else{
+          couleur("32");printf("Acces autorise\n");couleur("0");
+          sleep(1);break;
+      }
     }while(strcmp("pomme",try)!=0);
 
     tabarticles = creationtableau(nbarticles);
@@ -287,7 +294,7 @@ int main(){
         error_gestion = 0;isIn = 0;
         printf("Veuillez entrer le nom de l'article. 'Sortir' pour sortir du mode gestion \n");
         scanf("%s",searchname);
-        
+
         if(error_gestion == 0){
             for(int x = 0; x<nbarticles;x++){
                 if(strcmp(searchname,tabarticles[x].name) == 0){
@@ -322,7 +329,7 @@ int main(){
             }
             }
             if(isIn !=-1){error_gestion=-1;}
-            
+
         }while(error_gestion == -1);
 
         if(isArticleIn(tabarticles,nbarticles,searchname,searchref_number)==1){
@@ -345,38 +352,43 @@ int main(){
                 couleur("31");printf("Restockage impossible. Il n'y a pas assez de place dans le magasin\n");couleur("0");
             }
         }while(c!=1);
-        if(c==1){
-          couleur("32");printf("Le restockage s'est bien passe. Passez une bonne journee !\n");couleur("0");
-        }
+
         }
         free(tabarticles);
         remove("produits.txt");
         rename("tmp.txt", "produits.txt");
+        temporalDimension(tabarticles, searchname, searchref_number);
+      couleur("32");printf("Le restockage s'est bien passe");couleur("0");
+    }
+    else if(menu_user_choice == 3){
+          exit(0);
+      }
 
-        }
-        
-        else if(menu_user_choice == 3){
-            exit(0);
-        }
-        
 
-        
-    
+
+
     //passage dans la phase mode achat
     if(secondBoolHasAccount){
         //on peut proceder a la phase d'achat
-        //le client a MAINTENANT bel et bien un compte : 
+        //le client a MAINTENANT bel et bien un compte :
         couleur("35");printf("\n\n            Bienvenue %s ! Ca roule ? ^^",prenom);couleur("0");
         strcpy(tmp_name, nom);
         displayLastBuys(nom, prenom);
         searchArticle(tmp_name, prenom,5);
     }
-    else{   
-        exit(0);
-    }
     couleur("0");
-  
 
+
+
+  do{
+    error_gestion = 0;
+    printf("\n\nQue voulez vous faire ?\n1)Revenir au menu principal\n2)Quitter 404-Shop :( \n   -> ");
+    if(scanf("%d",&want_to_reboot) != 1){scanf("%*[^\n]");scanf("%*c");error_gestion=-1;}
+  }while(error_gestion == -1);
+
+}while(want_to_reboot == 1);
+
+couleur("32");printf("\n\nPassez une agréable journée :) ");couleur("0");
 
 
     return 0;
