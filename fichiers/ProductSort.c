@@ -9,7 +9,7 @@
 
 
 
-
+// la fonction sert à trier les articles en fonction de leur quantité
 void quantitiessort(Article* tab, int N){
   if(tab == NULL || N <= 0){
         exit(50);
@@ -26,7 +26,7 @@ void quantitiessort(Article* tab, int N){
     }
 
 }
-
+// la fonction trie en fonction du numéro de référence
 void numsort(Article* tab, int N){
   if(tab == NULL || N <= 0){
         exit(50);
