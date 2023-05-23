@@ -12,9 +12,11 @@
 
 void displaysearchedarticle(Article* tab, int N, char name[6], int L){
   if(tab == NULL || N <= 0){
+    printf("Erreur de tableau ou de nombre d'article");
         exit(72);
     }
   int i;
+  //si on cherche par le nom alors le numéro de référence (L) sera nul.
   if(L==0){
   for(i=0;i<N;i++){
     if(strcmp(name,tab[i].name)==0){
@@ -24,6 +26,7 @@ void displaysearchedarticle(Article* tab, int N, char name[6], int L){
 
   }
   }
+  //si on cherche par le numéro de référence alors le nom sera nul.
   else if(strcmp(name,"")==0){
     for(i=0;i<N;i++){
       if(L==tab[i].ref_number){
@@ -38,13 +41,15 @@ void displaysearchedarticle(Article* tab, int N, char name[6], int L){
 
 }
 
-
+// retourne 1 si l'article a bien été trouvé, 0 sinon
 int isArticleIn(Article* tab, int N, char name[32], int L){
   if(tab == NULL || N <= 0){
+    printf("Erreur de tableau ou de nombre d'article");
         exit(70);
     }
 
   int i;
+  // si on cherche par le nom
   if(L==0){
     for(i=0;i<N;i++){
       if(strcmp(name,tab[i].name)==0){
@@ -53,6 +58,7 @@ int isArticleIn(Article* tab, int N, char name[32], int L){
       }
       }
   }
+  // si on cherche par le numéro de référence
   else if(strcmp(name,"")==0){
     for(i=0;i<N;i++){
       if(L==tab[i].ref_number){
