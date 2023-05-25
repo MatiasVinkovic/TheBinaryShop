@@ -70,6 +70,7 @@ else{
 }
 }
   //on affiche donc dans le fichier les données de chaque article y compris la nouvelle quantité de l'article en question
+printf("\nLe produit sera arrivé à 404-Shop dans quelques heures...");
 for(i=0;i<N;i++){
   fprintf(Tmp,"%d %s %.2f %d %d\n", tab[i].ref_number, tab[i].name, tab[i].price,tab[i].size, tab[i].qte);
 }
@@ -342,7 +343,7 @@ int main(){
                 couleur("31");printf("\nRestockage impossible. Il n'y a pas assez de place dans le magasin\n");couleur("0");
             }
           if(c==1){
-            printf("\nLe produit sera arrivé à 404-Shop dans quelques heures...");
+       
           }
         }while(c!=1);
                 
