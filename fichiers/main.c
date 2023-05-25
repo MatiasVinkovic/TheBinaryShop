@@ -250,6 +250,7 @@ int main(){
       if(remainingplace<0){
         printf("Nous sommes désolés, mais le magasin est saturé. Nous allons donc vous faire sortir du programme. Cependant, vous pouvez toujours nous aider en achetant des articles. ;)");
         exit(1);
+      }
 
     quantitiessort(tabarticles,NBR_ARTICLE);
 
