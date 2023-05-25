@@ -340,8 +340,11 @@ int main(){
             if(c==0){
                 couleur("31");printf("\nRestockage impossible. Il n'y a pas assez de place dans le magasin\n");couleur("0");
             }
+          if(c==1){
+            printf("\nLe produit sera arrivé à 404-Shop dans quelques heures...");
+          }
         }while(c!=1);
-                printf("\nLe produit sera arrivé à 404-Shop dans quelques heures...");
+                
 
 
         }
