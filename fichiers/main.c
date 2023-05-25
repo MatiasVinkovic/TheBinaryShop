@@ -239,7 +239,7 @@ int main(){
           couleur("32");printf("Acces autorise\n\n");couleur("0");
           sleep(1);break;
       }
-    }while(strcmp("pomme",try)!=0);
+    }while(strcmp("bonne_note_svp",try)!=0);
 // on remplit le tableau à l'aide de la fonction correspondante
     tabarticles = creationtableau(NBR_ARTICLE);
 // on calcule l'espace occupé dans le magasin
@@ -247,6 +247,9 @@ int main(){
         occupiedplace+=(tabarticles[k].qte*tabarticles[k].size);
     }
     remainingplace=SHOP-occupiedplace;
+      if(remainingplace<0){
+        printf("Nous sommes désolés, mais le magasin est saturé. Nous allons donc vous faire sortir du programme. Cependant, vous pouvez toujours nous aider en achetant des articles. ;)");
+        exit(1);
 
     quantitiessort(tabarticles,NBR_ARTICLE);
 
