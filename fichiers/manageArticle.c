@@ -125,6 +125,7 @@ void temporalAspect(int number_search,char name_search[32]){
         }
       }
     }
+  // si on chercher par nom
     else if(strcmp(name_search,"") == 0){
       for(int i = 0; i<NBR_ARTICLE; i++){
         if(tab[i].ref_number == number_search){
@@ -133,6 +134,6 @@ void temporalAspect(int number_search,char name_search[32]){
         }
       }
     }
-
+// on libère l'espace alloué par la fonction malloc
   free(tab);
 }
