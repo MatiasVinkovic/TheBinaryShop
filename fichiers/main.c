@@ -45,10 +45,12 @@ int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO)
     k=j;//on retient l'indice du produit pour pouvoir utiliser sa taille plus tard
   }
 }
+    //si le nouvel espace occupé est supérieur à la taille du magasin alors on ferme le fichier et on retourne 0
 if(SO>SHOP){
   fclose(Tmp);
   return 0;
 }
+    //sinon on ajoute la quantité que l'on veut ajouter à la quantité du produit déjà existante
 else{
   tab[k].qte+=A;
 }
@@ -61,10 +63,12 @@ for( j=0;j<N;j++){
     k=j;
   }
 }
+  //si le nouvel espace occupé est supérieur à la taille du magasin alors on ferme le fichier et on retourne 0
 if(SO>SHOP){
   fclose(Tmp);
   return 0;
 }
+  //sinon on ajoute la quantité que l'on veut ajouter à la quantité du produit déjà existante
 else{
   tab[k].qte+=A;
 }
@@ -247,24 +251,28 @@ int main(){
     for(k=0;k<NBR_ARTICLE;k++){
         occupiedplace+=(tabarticles[k].qte*tabarticles[k].size);
     }
+   // on calcule l'espace restant
     remainingplace=SHOP-occupiedplace;
+    //si l'espace restant est négatif alors on sort du programme
       if(remainingplace<0){
         printf("Nous sommes désolés, mais le magasin est saturé. Nous allons donc vous faire sortir du programme. Cependant, vous pouvez toujours nous aider en achetant des articles. ;)");
         exit(1);
       }
-
+// on trie le tableau par quantité
     quantitiessort(tabarticles,NBR_ARTICLE);
-
+// on affiche les articles dont le stock est épuisé
     for(i=0;i<NBR_ARTICLE;i++){
     if(tabarticles[i].qte==0){
         couleur("31");printf("\nLe stock de %s est epuise ! \n",tabarticles[i].name);couleur("0");
         count++;
     }
     }
+      //ensuite on affiche les 5 articles en partant de l'endroit où les articles n'ont plus un stock nul
     for(j=0+count;j<lowstock+count;j++){
       couleur("33");printf("Il ne reste que %d de %s \n",tabarticles[j].qte,tabarticles[j].name);couleur("0");
 
     }
+      // on affiche la place restante en magasin
     couleur("32");printf("Il reste %d de place dans le magasin\n",remainingplace);couleur("0");
     sleep(1);
     numsort(tabarticles,NBR_ARTICLE);
@@ -297,7 +305,7 @@ int main(){
         exit(0);
         }
     }while(error_gestion==-1);
-
+    // on affiche donc l'article qui est donc dans le tableau
     if(isArticleIn(tabarticles,NBR_ARTICLE,searchname,searchref_number)==1){
     displaysearchedarticle(tabarticles,NBR_ARTICLE,searchname,searchref_number);
     }
@@ -322,7 +330,7 @@ int main(){
             if(isIn !=-1){error_gestion=-1;}
 
         }while(error_gestion == -1);
-
+        // on affiche donc l'article qui est donc dans le tableau
         if(isArticleIn(tabarticles,NBR_ARTICLE,searchname,searchref_number)==1){
         displaysearchedarticle(tabarticles,NBR_ARTICLE,searchname,searchref_number);
         }
@@ -337,6 +345,7 @@ int main(){
         exit(0);
         }
         else{
+          // demande la quantité d'articles à ajouter tant qu'elle n'est pas valide
         do{
             c=refill(tabarticles,NBR_ARTICLE,searchref_number,searchname,occupiedplace);
             if(c==0){
