@@ -1,4 +1,4 @@
-# TheBinaryShop
+# TheBinaryShop - 404-SHOP
 
 Bienvenue dans notre projet : TheBinaryShop / The 404-Shop
 
