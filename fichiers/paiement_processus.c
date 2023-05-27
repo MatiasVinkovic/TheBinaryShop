@@ -109,7 +109,7 @@ void paiement(){
                     couleur("31");printf("\nInvalid input ->Please enter a correct number\n");couleur("0");scanf("%*[^\n]");scanf("%*c");
                     error_gestion = -1;
                 }
-                if(getIntLen(card_number) != 1){error_gestion = -1;couleur("31");printf("\nVeuiilez renter un numéro de carte valide\n");couleur("0");}
+                if(getIntLen(card_number) != 16){error_gestion = -1;couleur("31");printf("\nVeuiilez renter un numéro de carte valide\n");couleur("0");}
             }while(error_gestion == -1);
             //printf("la longueur du chiffre est de %d", getIntLen(card_number));
             
