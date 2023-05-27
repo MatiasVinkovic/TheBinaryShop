@@ -32,7 +32,7 @@ int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO)
       exit(0);
     }
   }while(error_gestion == -1);
-  printf("\nLe produit sera arrivé à 404-Shop dans quelques heures...");
+  printf("\nLe produit sera arrivé à 404-Shop dans quelques heures...\n");
   //On ouvre le nouveau fichier texte qui contiendra la quantité ajoutée
   Tmp=fopen("tmp.txt","w");
   if(Tmp==NULL){
@@ -55,6 +55,7 @@ if(SO>SHOP){
     //sinon on ajoute la quantité que l'on veut ajouter à la quantité du produit déjà existante
 else{
   tab[k].qte+=A;
+  //on simule le temps d'attente en fonction de la taille du produit
   cooldown=tab[k].size*1.5;
   sleep(cooldown);
 }
@@ -75,6 +76,7 @@ if(SO>SHOP){
   //sinon on ajoute la quantité que l'on veut ajouter à la quantité du produit déjà existante
 else{
   tab[k].qte+=A;
+  //on simule le temps d'attente en fonction de la taille du produit
   cooldown=tab[k].size*1.5;
   sleep(cooldown);
 }
