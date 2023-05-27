@@ -11,10 +11,11 @@
 #include "prototype.h"
 
 int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO){
+  float cooldown=0;
   int error_gestion = 0;
   int i,j,l,k=0;
   FILE*Tmp=NULL;
-  int A,f;
+  int A;
   if(tab==NULL || N<=0){
     printf("Erreur avec le tableau\n");
     exit(35);
@@ -31,6 +32,7 @@ int refill(Article* tab,int N, int ref_numberofref, char articlename[32],int SO)
       exit(0);
     }
   }while(error_gestion == -1);
+  printf("\nLe produit sera arrivé à 404-Shop dans quelques heures...");
   //On ouvre le nouveau fichier texte qui contiendra la quantité ajoutée
   Tmp=fopen("tmp.txt","w");
   if(Tmp==NULL){
@@ -53,6 +55,8 @@ if(SO>SHOP){
     //sinon on ajoute la quantité que l'on veut ajouter à la quantité du produit déjà existante
 else{
   tab[k].qte+=A;
+  cooldown=tab[k].size*1.5;
+  sleep(cooldown);
 }
 }
   //Même principe en effectuant une recherche par le nom
@@ -71,10 +75,12 @@ if(SO>SHOP){
   //sinon on ajoute la quantité que l'on veut ajouter à la quantité du produit déjà existante
 else{
   tab[k].qte+=A;
+  cooldown=tab[k].size*1.5;
+  sleep(cooldown);
 }
 }
   //on affiche donc dans le fichier les données de chaque article y compris la nouvelle quantité de l'article en question
-printf("\nLe produit sera arrivé à 404-Shop dans quelques heures...");
+
 for(i=0;i<N;i++){
   fprintf(Tmp,"%d %s %.2f %d %d\n", tab[i].ref_number, tab[i].name, tab[i].price,tab[i].size, tab[i].qte);
 }
@@ -366,7 +372,7 @@ int main(){
         
         
   
-      temporalAspect(searchref_number,searchname);
+      //temporalAspect(searchref_number,searchname);
 
       couleur("32");printf("\nLe restockage s'est bien passe");couleur("0");
       free(tabarticles);
